@@ -13,10 +13,41 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let _ = (scene as? UIWindowScene) else { return }
+        guard let scene = (scene as? UIWindowScene) else { return }
+        
+        let window = UIWindow(windowScene: scene)
+        
+        let feedViewController = FeedViewController() // Создаю екземпляр контроллера для ленты
+        let profileViewController = ProfileViewController() // Создаю екземпляр контроллера для профиля
+        
+        let feedNavigationController = UINavigationController(rootViewController: feedViewController) //Добавляю feedViewController как корневой контроллер feedNavigationController
+        let profileNavigationController = UINavigationController(rootViewController: profileViewController) //Добавляю profileViewController как корневой контроллер profileNavigationController
+        
+        feedNavigationController.tabBarItem = UITabBarItem(title: "Feed", image: UIImage(systemName: "list.clipboard"), tag: 0)
+        profileNavigationController.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.crop.circle.fill"), tag: 1)
+        
+        let tabBarController = UITabBarController() //Добавляю UITabBarController
+        tabBarController.viewControllers = [feedNavigationController, profileNavigationController] //Добавляю контроллеры в TabBar
+        tabBarController.selectedIndex = 0 // Выбран первый таб при запуске
+        
+        
+//        feedViewController.title = "Лента"
+//        profileViewController.title = "Профиль"
+        
+//        feedViewController.tabBarItem = UITabBarItem(title: "Feed", image: UIImage(named: "person"), tag: 0)
+//        profileViewController.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(named: "book.pages"), tag: 1)
+        
+//        let controllers = [feedViewController, profileViewController]
+//                tabBarController.viewControllers = controllers.map {
+//                    UINavigationController(rootViewController: $0)
+//                }
+    
+        
+        window.rootViewController = tabBarController
+        window.makeKeyAndVisible()
+        
+        self.window = window
+        
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -49,4 +80,5 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
 }
+
 

@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  FeedViewController.swift
 //  Navigation
 //
 //  Created by Maxim P on 17/05/2024.
@@ -7,13 +7,10 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class FeedViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
     }
-
-
 }
-
