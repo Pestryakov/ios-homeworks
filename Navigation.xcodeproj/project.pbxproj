@@ -14,6 +14,8 @@
 		8AD4C3C22BF7BDF200E7960A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8AD4C3C02BF7BDF200E7960A /* LaunchScreen.storyboard */; };
 		8AD4C3CA2BF7D2DA00E7960A /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD4C3C92BF7D2DA00E7960A /* FeedViewController.swift */; };
 		8AD4C3CC2BF7D2FF00E7960A /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD4C3CB2BF7D2FF00E7960A /* ProfileViewController.swift */; };
+		8AD4C3CE2BF8134B00E7960A /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD4C3CD2BF8134B00E7960A /* PostViewController.swift */; };
+		8AD4C3D02BF814A600E7960A /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD4C3CF2BF814A600E7960A /* InfoViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		8AD4C3C32BF7BDF200E7960A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8AD4C3C92BF7D2DA00E7960A /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		8AD4C3CB2BF7D2FF00E7960A /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		8AD4C3CD2BF8134B00E7960A /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
+		8AD4C3CF2BF814A600E7960A /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +67,8 @@
 				8AD4C3B92BF7BDF100E7960A /* ViewController.swift */,
 				8AD4C3C92BF7D2DA00E7960A /* FeedViewController.swift */,
 				8AD4C3CB2BF7D2FF00E7960A /* ProfileViewController.swift */,
+				8AD4C3CD2BF8134B00E7960A /* PostViewController.swift */,
+				8AD4C3CF2BF814A600E7960A /* InfoViewController.swift */,
 				8AD4C3BE2BF7BDF200E7960A /* Assets.xcassets */,
 				8AD4C3C02BF7BDF200E7960A /* LaunchScreen.storyboard */,
 				8AD4C3C32BF7BDF200E7960A /* Info.plist */,
@@ -140,8 +146,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8AD4C3CE2BF8134B00E7960A /* PostViewController.swift in Sources */,
 				8AD4C3BA2BF7BDF100E7960A /* ViewController.swift in Sources */,
 				8AD4C3B62BF7BDF100E7960A /* AppDelegate.swift in Sources */,
+				8AD4C3D02BF814A600E7960A /* InfoViewController.swift in Sources */,
 				8AD4C3CC2BF7D2FF00E7960A /* ProfileViewController.swift in Sources */,
 				8AD4C3CA2BF7D2DA00E7960A /* FeedViewController.swift in Sources */,
 				8AD4C3B82BF7BDF100E7960A /* SceneDelegate.swift in Sources */,
