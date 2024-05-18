@@ -17,68 +17,34 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let window = UIWindow(windowScene: scene)
         
-        let feedViewController = FeedViewController() // Создаю екземпляр контроллера для ленты
-        let profileViewController = ProfileViewController() // Создаю екземпляр контроллера для профиля
+        let feedViewController = FeedViewController()
+        let profileViewController = ProfileViewController()
         
-        let feedNavigationController = UINavigationController(rootViewController: feedViewController) //Добавляю feedViewController как корневой контроллер feedNavigationController
-        let profileNavigationController = UINavigationController(rootViewController: profileViewController) //Добавляю profileViewController как корневой контроллер profileNavigationController
+        let feedNavigationController = UINavigationController(rootViewController: feedViewController)
+        let profileNavigationController = UINavigationController(rootViewController: profileViewController)
         
         feedNavigationController.tabBarItem = UITabBarItem(title: "Feed", image: UIImage(systemName: "list.clipboard"), tag: 0)
         profileNavigationController.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.crop.circle.fill"), tag: 1)
         
-        let tabBarController = UITabBarController() //Добавляю UITabBarController
-        tabBarController.viewControllers = [feedNavigationController, profileNavigationController] //Добавляю контроллеры в TabBar
-        tabBarController.selectedIndex = 0 // Выбран первый таб при запуске
-        
-        
-        //        feedViewController.title = "Лента"
-        //        profileViewController.title = "Профиль"
-        
-        //        feedViewController.tabBarItem = UITabBarItem(title: "Feed", image: UIImage(named: "person"), tag: 0)
-        //        profileViewController.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(named: "book.pages"), tag: 1)
-        
-        //        let controllers = [feedViewController, profileViewController]
-        //                tabBarController.viewControllers = controllers.map {
-        //                    UINavigationController(rootViewController: $0)
-        //                }
-        
+        let tabBarController = UITabBarController()
+        tabBarController.viewControllers = [feedNavigationController, profileNavigationController]
+        tabBarController.selectedIndex = 0
         
         window.rootViewController = tabBarController
         window.makeKeyAndVisible()
         
         self.window = window
-        
     }
     
-    func sceneDidDisconnect(_ scene: UIScene) {
-        // Called as the scene is being released by the system.
-        // This occurs shortly after the scene enters the background, or when its session is discarded.
-        // Release any resources associated with this scene that can be re-created the next time the scene connects.
-        // The scene may re-connect later, as its session was not necessarily discarded (see `application:didDiscardSceneSessions` instead).
-    }
+    func sceneDidDisconnect(_ scene: UIScene) {}
     
-    func sceneDidBecomeActive(_ scene: UIScene) {
-        // Called when the scene has moved from an inactive state to an active state.
-        // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
-    }
+    func sceneDidBecomeActive(_ scene: UIScene) {}
     
-    func sceneWillResignActive(_ scene: UIScene) {
-        // Called when the scene will move from an active state to an inactive state.
-        // This may occur due to temporary interruptions (ex. an incoming phone call).
-    }
+    func sceneWillResignActive(_ scene: UIScene) {}
     
-    func sceneWillEnterForeground(_ scene: UIScene) {
-        // Called as the scene transitions from the background to the foreground.
-        // Use this method to undo the changes made on entering the background.
-    }
+    func sceneWillEnterForeground(_ scene: UIScene) {}
     
-    func sceneDidEnterBackground(_ scene: UIScene) {
-        // Called as the scene transitions from the foreground to the background.
-        // Use this method to save data, release shared resources, and store enough scene-specific state information
-        // to restore the scene back to its current state.
-    }
-    
-    
+    func sceneDidEnterBackground(_ scene: UIScene) {}
 }
 
 

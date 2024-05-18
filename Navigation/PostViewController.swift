@@ -13,7 +13,7 @@ struct Post {
 
 class PostViewController: UIViewController {
     
-    var post: Post? // переменная для поста
+    var post: Post?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +29,7 @@ class PostViewController: UIViewController {
     }
     
     @objc func infoButtonTapped() {
-        let infoViewController = InfoViewController() // Создаем экземпляр InfoViewController
+        let infoViewController = InfoViewController()
         
         infoViewController.modalTransitionStyle = .flipHorizontal
         infoViewController.modalPresentationStyle = .pageSheet
