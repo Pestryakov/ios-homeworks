@@ -48,6 +48,8 @@ class ProfileHeaderView: UIView {
         button.layer.shadowRadius = 4
         button.layer.shadowOpacity = 0.7
         
+        button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        
         return button
     }()
     
@@ -87,15 +89,26 @@ class ProfileHeaderView: UIView {
         ])
         
         NSLayoutConstraint.activate([
+            title.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 27),
+            title.leftAnchor.constraint(equalTo: profileImageView.rightAnchor, constant: 20)
             
         ])
         
         NSLayoutConstraint.activate([
+            subTitle.leftAnchor.constraint(equalTo: profileImageView.rightAnchor, constant: 20),
+            subTitle.bottomAnchor.constraint(equalTo: actionButton.topAnchor, constant: -34)
             
         ])
         
         NSLayoutConstraint.activate([
-           
+            actionButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
+            actionButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
+            actionButton.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 16),
+            actionButton.heightAnchor.constraint(equalToConstant: 50)
         ])
+    }
+    
+    @objc func buttonPressed() {
+        print(subTitle.text ?? "hohoho")
     }
 }
