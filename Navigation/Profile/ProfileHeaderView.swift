@@ -92,24 +92,24 @@ class ProfileHeaderView: UIView {
         addSubview(textField)
         
         NSLayoutConstraint.activate([
-            profileImageView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            profileImageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
+            profileImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
+            profileImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 16),
             profileImageView.widthAnchor.constraint(equalToConstant: 100),
             profileImageView.heightAnchor.constraint(equalToConstant: 100),
             
             title.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 16),
-            title.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 27),
+            title.topAnchor.constraint(equalTo: self.topAnchor, constant: 27),
             
             subTitle.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 16),
             subTitle.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 15),
             
-            textField.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            textField.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
             textField.topAnchor.constraint(equalTo: subTitle.bottomAnchor, constant: 15),
             textField.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 16),
             
             actionButton.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: 16),
-            actionButton.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            actionButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            actionButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
+            actionButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
             actionButton.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
