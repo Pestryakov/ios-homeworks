@@ -54,6 +54,7 @@ class ProfileHeaderView: UIView {
     
     private lazy var statusTextField: UITextField = {
         let field = UITextField()
+        field.placeholder = "Write something"
         field.font = UIFont.systemFont(ofSize: 15)
         field.textColor = .black
         field.backgroundColor = .white
