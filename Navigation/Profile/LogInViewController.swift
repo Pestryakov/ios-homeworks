@@ -180,11 +180,12 @@ class LogInViewController: UIViewController {
     
     @objc func willShowKeyboard(_ notification: NSNotification) {
            let keyboardHeight = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height
-           scrollView.contentInset.bottom += keyboardHeight ?? 0.0
+           scrollView.contentInset.bottom = keyboardHeight ?? 0.0
        }
        
        @objc func willHideKeyboard(_ notification: NSNotification) {
            scrollView.contentInset.bottom = 0.0
+           scrollView.verticalScrollIndicatorInsets.bottom = 0.0
        }
 }
 
