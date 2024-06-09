@@ -9,6 +9,23 @@ import UIKit
 
 class LogInViewController: UIViewController {
     
+    private lazy var scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.backgroundColor = .systemBrown
+        scrollView.showsVerticalScrollIndicator = true
+        scrollView.showsHorizontalScrollIndicator = false
+        //scrollView.alwaysBounceVertical = true
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        return scrollView
+    }()
+    
+    private lazy var contentView: UIView = {
+        let contentView = UIView()
+        contentView.backgroundColor = .systemBlue
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        return contentView
+    }()
+    
     private lazy var loginImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "Login")
@@ -17,28 +34,36 @@ class LogInViewController: UIViewController {
         return imageView
     }()
     
-    private lazy var emailOrPhoneTextField: UITextField = {
+    private lazy var emailOrPhoneTextField: UITextField = { [unowned self] in
         let textField = UITextField()
-        textField.placeholder = "Email or Phone"
-        textField.borderStyle = .roundedRect
+        textField.placeholder = "    Email or Phone"
         textField.keyboardType = .emailAddress
         textField.backgroundColor = .systemGray6
         textField.textColor = .black
         textField.font = UIFont.systemFont(ofSize: 16)
         textField.autocapitalizationType = .none
+        textField.layer.borderColor = UIColor.lightGray.cgColor
+        textField.layer.borderWidth = 0.5
+        textField.layer.cornerRadius = 10
+        textField.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        textField.delegate = self
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
     
-    private lazy var passwordTextField: UITextField = {
+    private lazy var passwordTextField: UITextField = { [unowned self] in
         let textField = UITextField()
-        textField.placeholder = "Password"
-        textField.borderStyle = .roundedRect
+        textField.placeholder = "    Password"
         textField.isSecureTextEntry = true
         textField.backgroundColor = .systemGray6
         textField.textColor = .black
         textField.font = UIFont.systemFont(ofSize: 16)
         textField.autocapitalizationType = .none
+        textField.layer.borderColor = UIColor.lightGray.cgColor
+        textField.layer.borderWidth = 0.5
+        textField.layer.cornerRadius = 10
+        textField.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+        textField.delegate = self
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
@@ -65,59 +90,108 @@ class LogInViewController: UIViewController {
         
         return button
     }()
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
+        addSubviews()
         setupUI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.isNavigationBarHidden = true
+        setupKeyboardObservers()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        navigationController?.isNavigationBarHidden = false
+        super.viewWillDisappear(animated)
+        removeKeyboardObservers()
     }
     
+    private func addSubviews() {
+        view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
+        contentView.addSubview(loginImageView)
+        contentView.addSubview(emailOrPhoneTextField)
+        contentView.addSubview(passwordTextField)
+        contentView.addSubview(loginButton)
+    }
+    
+    
     private func setupUI() {
-        view.addSubview(loginImageView)
-        view.addSubview(emailOrPhoneTextField)
-        view.addSubview(passwordTextField)
-        view.addSubview(loginButton)
-        
         NSLayoutConstraint.activate([
-            // Картинка в верхней части экрана
-            loginImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 120),
-            loginImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            scrollView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
+            scrollView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
+            
+            contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            contentView.heightAnchor.constraint(greaterThanOrEqualTo: scrollView.heightAnchor),
+            
+            loginImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 120),
+            loginImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             loginImageView.widthAnchor.constraint(equalToConstant: 100),
             loginImageView.heightAnchor.constraint(equalToConstant: 100),
             
-            // Поле для ввода email или телефона
+            // Constraints for emailOrPhoneTextField
             emailOrPhoneTextField.topAnchor.constraint(equalTo: loginImageView.bottomAnchor, constant: 120),
-            emailOrPhoneTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            emailOrPhoneTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            emailOrPhoneTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            emailOrPhoneTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             emailOrPhoneTextField.heightAnchor.constraint(equalToConstant: 50),
             
-
-            // Поле для ввода пароля
-            passwordTextField.topAnchor.constraint(equalTo: emailOrPhoneTextField.bottomAnchor, constant: 0),
-            passwordTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            passwordTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            // Constraints for passwordTextField
+            passwordTextField.topAnchor.constraint(equalTo: emailOrPhoneTextField.bottomAnchor),
+            passwordTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            passwordTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             passwordTextField.heightAnchor.constraint(equalToConstant: 50),
             
-            // Кнопка для входа
+            // Constraints for loginButton
             loginButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 16),
-            loginButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            loginButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            loginButton.heightAnchor.constraint(equalToConstant: 50)
+            loginButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            loginButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            loginButton.heightAnchor.constraint(equalToConstant: 50) // This ensures the contentView is large enough to scroll
         ])
+    }
+    
+    
+    private func setupKeyboardObservers(){
+        let notificationCenter = NotificationCenter.default
+        
+        notificationCenter.addObserver(self, selector: #selector(self.willShowKeyboard(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        
+        notificationCenter.addObserver(self, selector: #selector(self.willHideKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    private func removeKeyboardObservers() {
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.removeObserver(self)
     }
     
     @objc private func logInButtonTap() {
         let profileViewController = ProfileViewController()
         navigationController?.setViewControllers([profileViewController], animated: true)
+    }
+    
+    @objc func willShowKeyboard(_ notification: NSNotification) {
+           let keyboardHeight = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height
+           scrollView.contentInset.bottom += keyboardHeight ?? 0.0
+       }
+       
+       @objc func willHideKeyboard(_ notification: NSNotification) {
+           scrollView.contentInset.bottom = 0.0
+       }
+}
+
+extension LogInViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        
+        return true
     }
 }
