@@ -18,13 +18,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: scene)
         
         let feedViewController = FeedViewController()
-        let profileViewController = ProfileViewController()
+        //let profileViewController = ProfileViewController()
+        let loginViewController = LogInViewController()
         
         let feedNavigationController = UINavigationController(rootViewController: feedViewController)
-        let profileNavigationController = UINavigationController(rootViewController: profileViewController)
+        let profileNavigationController = UINavigationController(rootViewController: loginViewController)
         
         feedNavigationController.tabBarItem = UITabBarItem(title: "Feed", image: UIImage(systemName: "list.clipboard"), tag: 0)
         profileNavigationController.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.crop.circle.fill"), tag: 1)
+    
         
         let tabBarController = UITabBarController()
         tabBarController.viewControllers = [feedNavigationController, profileNavigationController]
