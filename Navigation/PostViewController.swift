@@ -7,13 +7,15 @@
 
 import UIKit
 
-struct Post {
+struct myPost {
     var title: String
 }
 
+
 class PostViewController: UIViewController {
     
-    var post: Post?
+   
+    var post: myPost?
     
     override func viewDidLoad() {
         super.viewDidLoad()

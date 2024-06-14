@@ -21,6 +21,11 @@ class ProfileHeaderView: UIView {
         setupView()
     }
     
+    override var intrinsicContentSize: CGSize {
+        CGSize(
+            width: UIView.noIntrinsicMetric, height: UIView.noIntrinsicMetric
+        )
+    }
     private lazy var avatarImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "Profile")
