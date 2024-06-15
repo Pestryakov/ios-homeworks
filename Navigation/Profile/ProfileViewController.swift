@@ -11,9 +11,9 @@ class ProfileViewController: UIViewController {
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView.init( //устанавливает начальные координаты и обычныцй режим
-                    frame: .zero,
-                    style: .plain
-                )
+            frame: .zero,
+            style: .grouped
+        )
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
@@ -21,7 +21,7 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        setupView()
+ //              setupView()
         addSubviews()
         
         setupConstraints()
@@ -39,11 +39,11 @@ class ProfileViewController: UIViewController {
         }
     }
     
-//    private func setupView() {
-//            view.backgroundColor = .systemBackground
-//            navigationItem.title = "TableView example"
-//            navigationController?.navigationBar.prefersLargeTitles = false
-//        }
+//        private func setupView() {
+//                view.backgroundColor = .systemBackground
+//                navigationItem.title = "TableView example"
+//                navigationController?.navigationBar.prefersLargeTitles = false
+//            }
     
     private func addSubviews() {
         view.addSubview(tableView)
@@ -59,81 +59,73 @@ class ProfileViewController: UIViewController {
     }
     
     private func tuneTableView() {
-            // 2. Настраиваем отображение таблицы
-            tableView.rowHeight = UITableView.automaticDimension //высота строк
-            tableView.estimatedRowHeight = 44.0 // оценочная высота строк
-            
-            let headerView = ProfileHeaderView()
-            tableView.addSubview(headerView)
-//            headerView.translatesAutoresizingMaskIntoConstraints = false
-//            //tableView.setAndLayout(headerView: headerView)
-//        
-//        NSLayoutConstraint.activate([
-//                headerView.leadingAnchor.constraint(equalTo: tableView.leadingAnchor),
-//                headerView.trailingAnchor.constraint(equalTo: tableView.trailingAnchor),
-//                headerView.topAnchor.constraint(equalTo: tableView.topAnchor),
-//                headerView.bottomAnchor.constraint(equalTo: tableView.topAnchor, constant: 16),
-//                headerView.heightAnchor.constraint(equalToConstant: 200) // Задайте желаемую высоту
-//            ])
+        // 2. Настраиваем отображение таблицы
+        tableView.rowHeight = UITableView.automaticDimension //высота строк
+        tableView.estimatedRowHeight = 55.0 // оценочная высота строк
         
-            //tableView.tableFooterView = UIView()
-            
-            // 3. Указываем, с какими классами ячеек будет работать таблица
-//            tableView.register(
-//                BaseTableViewCell.self,
-//                forCellReuseIdentifier: CellReuseID.base.rawValue
-//            )
-            tableView.register(PostTableViewCell.self, forCellReuseIdentifier: "PostCell")
-            
-            // 4. Указываем основные делегаты таблицы
-            tableView.dataSource = self
-            tableView.delegate = self
-        }
+        //            let headerView = ProfileHeaderView()
+        //            tableView.addSubview(headerView)
+        
+        tableView.tableFooterView = UIView()
+        
+        
+        tableView.register(PostTableViewCell.self, forCellReuseIdentifier: "PostCell")
+        
+        // 4. Указываем основные делегаты таблицы
+        tableView.dataSource = self
+        tableView.delegate = self
+        
+    }
     
 }
 
 extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-            // Количество секций в таблице
-            return 1
-        }
-        
-        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            // Количество строк в секции
-            return posts.count
-        }
-        
-//        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//            // Получение и настройка ячейки для строки
-//            let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as! PostTableViewCell
-//            let post = posts[indexPath.row]
-//            cell.configure(with: post)
-//            return cell
-//        }
+        // Количество секций в таблице
+        return 1
+    }
     
-        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            guard let cell = tableView.dequeueReusableCell(
-                withIdentifier: "PostCell",
-                for: indexPath
-            ) as? PostTableViewCell else {
-                fatalError("Unable to dequeue PostTableViewCell")
-            }
-            // Настраиваем ячейку для отображения поста
-            let post = posts[indexPath.row]
-            cell.configure(with: post)
-            return cell
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // Количество строк в секции
+        return posts.count
+    }
+    
+    //        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    //            // Получение и настройка ячейки для строки
+    //            let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as! PostTableViewCell
+    //            let post = posts[indexPath.row]
+    //            cell.configure(with: post)
+    //            return cell
+    //        }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: "PostCell",
+            for: indexPath
+        ) as? PostTableViewCell else {
+            fatalError("Unable to dequeue PostTableViewCell")
         }
-        
-        // Метод для установки заголовка секции
-//        func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//            let headerView = ProfileHeaderView()
-//            return headerView
-//        }
-        
-        // Метод для установки высоты заголовка секции
-//        func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//            return UITableView.automaticDimension
+        // Настраиваем ячейку для отображения поста
+        let post = posts[indexPath.row]
+        cell.configure(with: post)
+        return cell
+    }
+    
+            // Метод для установки заголовка секции
+            func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+                let headerView = ProfileHeaderView()
+                return headerView
+            }
+    
+            //Метод для установки высоты заголовка секции
+            func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+                return 220
+            }
+    
+            //Устанвливаем высоту строк
+//        func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//            UITableView.automaticDimension
 //        }
     
 }

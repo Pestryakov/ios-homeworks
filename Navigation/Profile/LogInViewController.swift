@@ -13,8 +13,8 @@ class LogInViewController: UIViewController {
         let scrollView = UIScrollView()
         scrollView.backgroundColor = .systemBrown
         scrollView.showsVerticalScrollIndicator = true
+        scrollView.alwaysBounceVertical = true
         scrollView.showsHorizontalScrollIndicator = false
-        //scrollView.alwaysBounceVertical = true
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         return scrollView
     }()
@@ -132,8 +132,6 @@ class LogInViewController: UIViewController {
         scrollView.addSubview(contentView)
         contentView.addSubview(loginImageView)
         contentView.addSubview(textFieldStackView)
-        //        contentView.addSubview(emailOrPhoneTextField)
-        //        contentView.addSubview(passwordTextField)
         contentView.addSubview(loginButton)
     }
     
