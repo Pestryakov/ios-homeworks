@@ -1,10 +1,3 @@
-//
-//  UITableViewExtensions.swift
-//  Navigation
-//
-//  Created by Maxim P on 13/06/2024.
-//
-
 import UIKit
 
 extension UITableView {

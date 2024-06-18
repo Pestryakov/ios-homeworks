@@ -1,10 +1,3 @@
-//
-//  LogInViewController.swift
-//  Navigation
-//
-//  Created by Maxim P on 06/06/2024.
-//
-
 import UIKit
 
 class LogInViewController: UIViewController {
@@ -55,6 +48,11 @@ class LogInViewController: UIViewController {
         textField.isSecureTextEntry = true
         textField.backgroundColor = .systemGray6
         textField.textColor = .black
+        textField.autocorrectionType = UITextAutocorrectionType.no
+        textField.keyboardType = UIKeyboardType.decimalPad
+        textField.returnKeyType = UIReturnKeyType.done
+        textField.clearButtonMode = UITextField.ViewMode.whileEditing
+        textField.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
         textField.font = UIFont.systemFont(ofSize: 16)
         textField.autocapitalizationType = .none
         textField.layer.borderColor = UIColor.lightGray.cgColor
@@ -75,13 +73,13 @@ class LogInViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         
         if button.isSelected {
-            button.alpha = 0.8 // Выбранное состояние
+            button.alpha = 0.8
         } else if button.isHighlighted {
-            button.alpha = 0.8 // Состояние выделения
+            button.alpha = 0.8
         } else if !button.isEnabled {
-            button.alpha = 0.8 // Неактивное состояние
+            button.alpha = 0.8
         } else {
-            button.alpha = 1 // Номинальное состояние
+            button.alpha = 1
         }
         
         return button

@@ -1,15 +1,8 @@
-//
-//  FeedViewController.swift
-//  Navigation
-//
-//  Created by Maxim P on 17/05/2024.
-//
-
 import UIKit
 
 class FeedViewController: UIViewController {
     
-        private lazy var oneButton: UIButton = {
+    private lazy var oneButton: UIButton = {
         let button = UIButton()
         button.setTitle("Post One", for: .normal)
         button.setTitleColor(.white, for: .normal)

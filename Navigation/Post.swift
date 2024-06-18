@@ -1,10 +1,3 @@
-//
-//  Post.swift
-//  Navigation
-//
-//  Created by Maxim P on 12/06/2024.
-//
-
 import Foundation
 
 struct Post {

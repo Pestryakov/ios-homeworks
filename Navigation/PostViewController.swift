@@ -1,10 +1,3 @@
-//
-//  PostViewController.swift
-//  Navigation
-//
-//  Created by Maxim P on 17/05/2024.
-//
-
 import UIKit
 
 struct myPost {
@@ -14,7 +7,7 @@ struct myPost {
 
 class PostViewController: UIViewController {
     
-   
+    
     var post: myPost?
     
     override func viewDidLoad() {
@@ -26,17 +19,17 @@ class PostViewController: UIViewController {
             title = post.title
         }
         
-                let infoButton = UIBarButtonItem(title: "More", style: .plain, target: self, action: #selector(infoButtonTapped))
-                navigationItem.rightBarButtonItem = infoButton
+        let infoButton = UIBarButtonItem(title: "More", style: .plain, target: self, action: #selector(infoButtonTapped))
+        navigationItem.rightBarButtonItem = infoButton
     }
     
-        @objc func infoButtonTapped() {
-            let infoViewController = InfoViewController()
-    
-            infoViewController.modalTransitionStyle = .flipHorizontal
-            infoViewController.modalPresentationStyle = .pageSheet
-    
-            present(infoViewController, animated: true, completion: nil)
-        }
+    @objc func infoButtonTapped() {
+        let infoViewController = InfoViewController()
+        
+        infoViewController.modalTransitionStyle = .flipHorizontal
+        infoViewController.modalPresentationStyle = .pageSheet
+        
+        present(infoViewController, animated: true, completion: nil)
+    }
     
 }

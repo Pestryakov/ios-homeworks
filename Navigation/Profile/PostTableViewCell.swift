@@ -1,10 +1,3 @@
-//
-//  PostTableViewCell.swift
-//  Navigation
-//
-//  Created by Maxim P on 13/06/2024.
-//
-
 import UIKit
 
 class PostTableViewCell: UITableViewCell {
@@ -59,7 +52,27 @@ class PostTableViewCell: UITableViewCell {
         
         let selectedBackgroundView = UIView()
         selectedBackgroundView.backgroundColor = .lightGray
-                self.selectedBackgroundView = selectedBackgroundView
+        self.selectedBackgroundView = selectedBackgroundView
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        isHidden = false
+        isSelected = false
+        isHighlighted = false
+    }
+    
+    // @link https://stackoverflow.com/a/72277752
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        
+        guard let view = selectedBackgroundView else {
+            return
+        }
+        
+        contentView.insertSubview(view, at: 0)
+        selectedBackgroundView?.isHidden = !selected
     }
     
     required init?(coder: NSCoder) {
@@ -75,28 +88,28 @@ class PostTableViewCell: UITableViewCell {
     }
     
     private func setupConstraint() {
-    
+        
         NSLayoutConstraint.activate([
             
-                authorLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
-                authorLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-                authorLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-                
-                postImageView.topAnchor.constraint(equalTo: authorLabel.bottomAnchor, constant: 12),
-                postImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-                postImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-                postImageView.heightAnchor.constraint(equalTo: postImageView.widthAnchor),
-                
-                descriptionLabel.topAnchor.constraint(equalTo: postImageView.bottomAnchor, constant: 16),
-                descriptionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-                descriptionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-                
-                likesLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 16),
-                likesLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-                
-                viewsLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 16),
-                viewsLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-                viewsLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8)
+            authorLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
+            authorLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            authorLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            
+            postImageView.topAnchor.constraint(equalTo: authorLabel.bottomAnchor, constant: 12),
+            postImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            postImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            postImageView.heightAnchor.constraint(equalTo: postImageView.widthAnchor),
+            
+            descriptionLabel.topAnchor.constraint(equalTo: postImageView.bottomAnchor, constant: 16),
+            descriptionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            descriptionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            
+            likesLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 16),
+            likesLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            
+            viewsLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 16),
+            viewsLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            viewsLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8)
         ])
     }
     
