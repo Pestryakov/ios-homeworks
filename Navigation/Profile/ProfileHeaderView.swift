@@ -1,10 +1,3 @@
-//
-//  ProfileHeaderView.swift
-//  Navigation
-//
-//  Created by Maxim P on 25/05/2024.
-//
-
 import UIKit
 
 class ProfileHeaderView: UIView {
@@ -21,6 +14,11 @@ class ProfileHeaderView: UIView {
         setupView()
     }
     
+    override var intrinsicContentSize: CGSize {
+        CGSize(
+            width: UIView.noIntrinsicMetric, height: UIView.noIntrinsicMetric
+        )
+    }
     private lazy var avatarImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "Profile")
@@ -82,7 +80,7 @@ class ProfileHeaderView: UIView {
         button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
         return button
     }()
-        
+    
     
     private func setupView() {
         addSubview(avatarImageView)
@@ -122,6 +120,14 @@ class ProfileHeaderView: UIView {
     }
     
     @objc func buttonPressed() {
+        guard !statusText.isEmpty else {
+            let alert = UIAlertController(title: "Ошибка", message: "Пожалуйста, введите статус.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "ОК", style: .default, handler: nil))
+            if let viewController = self.window?.rootViewController {
+                viewController.present(alert, animated: true, completion: nil)
+            }
+            return
+        }
         statusLabel.text = statusText
         print(statusLabel.text ?? "")
     }

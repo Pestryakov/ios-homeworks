@@ -1,10 +1,3 @@
-//
-//  SceneDelegate.swift
-//  Navigation
-//
-//  Created by Maxim P on 17/05/2024.
-//
-
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
@@ -26,7 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         feedNavigationController.tabBarItem = UITabBarItem(title: "Feed", image: UIImage(systemName: "list.clipboard"), tag: 0)
         profileNavigationController.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.crop.circle.fill"), tag: 1)
-    
+        
         
         let tabBarController = UITabBarController()
         tabBarController.viewControllers = [feedNavigationController, profileNavigationController]

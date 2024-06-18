@@ -1,10 +1,3 @@
-//
-//  FeedViewController.swift
-//  Navigation
-//
-//  Created by Maxim P on 17/05/2024.
-//
-
 import UIKit
 
 class FeedViewController: UIViewController {
@@ -81,14 +74,14 @@ class FeedViewController: UIViewController {
     
     @objc func buttonOnePressed() {
         let postViewController = PostViewController()
-        let post = Post(title: "Post Number One")
+        let post = myPost(title: "Post Number One")
         postViewController.post = post
         navigationController?.pushViewController(postViewController, animated: true)
     }
     
     @objc func buttonTwoPressed() {
         let postViewController = PostViewController()
-        let post = Post(title: "Post Number Two")
+        let post = myPost(title: "Post Number Two")
         postViewController.post = post
         navigationController?.pushViewController(postViewController, animated: true)
     }
