@@ -49,6 +49,7 @@ class ProfileViewController: UIViewController {
         }
         
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: "PostCell")
+        tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: "PhotosCell")
         tableView.dataSource = self
         tableView.delegate = self
         
@@ -63,19 +64,26 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return posts.count
+        return posts.count + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: "PostCell",
-            for: indexPath
-        ) as? PostTableViewCell else {
-            fatalError("Unable to dequeue PostTableViewCell")
+        if indexPath.row == 0 {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "PhotosCell", for: indexPath) as? PhotosTableViewCell else {
+                fatalError("Error")
+            }
+            return cell
+        } else {
+            guard let cell = tableView.dequeueReusableCell(
+                withIdentifier: "PostCell",
+                for: indexPath
+            ) as? PostTableViewCell else {
+                fatalError("Unable to dequeue PostTableViewCell")
+            }
+            let post = posts[indexPath.row - 1]
+            cell.configure(with: post)
+            return cell
         }
-        let post = posts[indexPath.row]
-        cell.configure(with: post)
-        return cell
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -88,7 +96,11 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        UITableView.automaticDimension
+        if indexPath.row == 0 {
+            return UITableView.automaticDimension
+        } else {
+            return UITableView.automaticDimension
+        }
     }
     
 }
