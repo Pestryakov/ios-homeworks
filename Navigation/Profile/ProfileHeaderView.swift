@@ -121,8 +121,8 @@ class ProfileHeaderView: UIView {
     
     @objc func buttonPressed() {
         guard !statusText.isEmpty else {
-            let alert = UIAlertController(title: "Ошибка", message: "Пожалуйста, введите статус.", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "ОК", style: .default, handler: nil))
+            let alert = UIAlertController(title: "Error", message: "Please, enter your status.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
             if let viewController = self.window?.rootViewController {
                 viewController.present(alert, animated: true, completion: nil)
             }
